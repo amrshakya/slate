@@ -3,15 +3,16 @@ title: API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
-  - ruby
-  - python
-  - javascript
+ # - ruby
+ # - python
+ # - javascript
 
 toc_footers:
  # - <a href='#'>Sign Up for a Developer Key</a>
   - <a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>
 
 includes:
+  - posts
   - errors
 
 search: true
@@ -19,119 +20,94 @@ search: true
 
 # Introduction
 
-Welcome to the KK API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Welcome to the KK API! You can use our API to access KK API endpoints, which can get information on various 'Mind Your Own Businesses'es.
 
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+This example API documentation page was created with [Slate](https://github.com/tripit/slate).
 
-This example API documentation page was created with [Slate](https://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
+# Usage
 
-# Authentication
+## Access Token
 
-> To authorize, use this code:
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
+> To authorize, use these headers:
 
 ```shell
-# With shell, you can just pass the correct header with each request
 curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
+  -H "access-token: xxxxxxxxxxx"
+  -H "client: xxxxxxxxxxx"
+  -H "expiry: xxxxxxxxxxx"
+  -H "uid: xxxxxxxxxxx"
+  -H "token-type: xxxxxxxxxxx"
 ```
 
-```javascript
-const kittn = require('kittn');
+> Make sure to replace `xxxxxxxxxxx` with your respective field from the response headers in any API response.
 
-let api = kittn.authorize('meowmeowmeow');
-```
+KK uses access tokens to allow access to the API.
 
-> Make sure to replace `meowmeowmeow` with your API key.
+KK expects for the access token, client. expiry, uid and token-type to be included in all API requests to the server in a header that looks like the following:
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
+`access-token: xxxxxxxxxxx`
 
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
+`client: xxxxxxxxxxx`
 
-`Authorization: meowmeowmeow`
+`expiry: xxxxxxxxxxx`
+
+`uid: xxxxxxxxxxx`
+
+`token-type: xxxxxxxxxxx`
+
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+You must replace <code>xxxxxxxxxxx</code> with our respective field from the response headers in any API response.
 </aside>
 
-# Kittens
+# Auth
 
-## Get All Kittens
+## Log In
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
 
 ```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
+curl http://localhost:3000/auth/sign_in 
+  -X POST  
+  -F "email=user_admin@gmail.com" 
+  -F "password=Pras1234" 
+
+  
 ```
 
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
-
-> The above command returns JSON structured like this:
+> The above command returns, along with the required auth headers, JSON structured like this:
 
 ```json
-[
-  {
+{
+  "data": {
     "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
+    "email": "user_admin@gmail.com",
+    "name": "Prasanna Mishra",
+    "image": null,
+    "roles": [
+      "admin"
+    ],
+    "admin": true
   }
-]
+}
 ```
 
-This endpoint retrieves all kittens.
+This endpoint logs in a user.
 
 ### HTTP Request
 
-`GET http://example.com/api/kittens`
+`POST http://localhost:3000/auth/sign_in`
 
-### Query Parameters
+### Parameters
 
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+Parameter | Description
+--------- | -----------
+email | Self Explanatory.
+password | Self Explanatory.
 
-<aside class="success">
+<!-- <aside class="success">
 Remember — a happy kitten is an authenticated kitten!
-</aside>
+</aside> -->
+## Sign Up
 
 ## Get a Specific Kitten
 
