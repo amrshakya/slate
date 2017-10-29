@@ -13,6 +13,10 @@ toc_footers:
 
 includes:
   - posts
+  - comments
+  - exchange_rates
+  - companies
+  - rates
   - errors
 
 search: true

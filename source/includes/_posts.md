@@ -182,6 +182,7 @@ curl http://localhost:3000/posts/status/Booked?page=1
 ```
 
 This endpoint lists all posts.
+<aside class="warning"><code>Deprication Warning!</code> This endpoint will be depricated soon.</aside>
 
 ### HTTP Request
 
@@ -249,7 +250,9 @@ curl http://localhost:3000/posts/type/Room?page=1
 }
 ```
 
-This endpoint lists all posts.
+This endpoint lists all posts by type.
+
+<aside class="warning"><code>Deprication Warning!</code> This endpoint will be depricated soon.</aside>
 
 ### HTTP Request
 
