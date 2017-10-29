@@ -273,6 +273,56 @@
               </ul>
           </li>
           <li>
+            <a href="#comments" class="toc-h1 toc-link" data-title="Comments">Comments</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#create-a-comment" class="toc-h2 toc-link" data-title="Comments">Create a Comment</a>
+                  </li>
+                  <li>
+                    <a href="#all-comments" class="toc-h2 toc-link" data-title="Comments">All Comments</a>
+                  </li>
+                  <li>
+                    <a href="#deleting-a-comment" class="toc-h2 toc-link" data-title="Comments">Deleting a comment</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#exchange-rates" class="toc-h1 toc-link" data-title="Exchange Rates">Exchange Rates</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#all-exchange-rates" class="toc-h2 toc-link" data-title="Exchange Rates">All Exchange Rates</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#companies" class="toc-h1 toc-link" data-title="Companies">Companies</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#create-a-company" class="toc-h2 toc-link" data-title="Companies">Create a Company</a>
+                  </li>
+                  <li>
+                    <a href="#all-companies" class="toc-h2 toc-link" data-title="Companies">All Companies</a>
+                  </li>
+                  <li>
+                    <a href="#companies-by-type" class="toc-h2 toc-link" data-title="Companies">Companies by Type</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#rates" class="toc-h1 toc-link" data-title="Rates">Rates</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#create-a-rate" class="toc-h2 toc-link" data-title="Rates">Create a Rate</a>
+                  </li>
+                  <li>
+                    <a href="#update-a-rate" class="toc-h2 toc-link" data-title="Rates">Update a Rate</a>
+                  </li>
+                  <li>
+                    <a href="#all-rates" class="toc-h2 toc-link" data-title="Rates">All Rates</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
       </div>
@@ -632,7 +682,8 @@ Remember — a happy kitten is an authenticated kitten!
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint lists all posts.</p>
+<p>This endpoint lists all posts.
+<aside class="warning"><code>Deprication Warning!</code> This endpoint will be depricated soon.</aside></p>
 <h3 id='http-request-3'>HTTP Request</h3>
 <p><code>GET http://localhost:3000/posts/status/:post_status?page=n</code></p>
 <h3 id='query-parameters-2'>Query Parameters</h3>
@@ -706,7 +757,9 @@ Remember — a happy kitten is an authenticated kitten!
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint lists all posts.</p>
+<p>This endpoint lists all posts by type.</p>
+
+<aside class="warning"><code>Deprication Warning!</code> This endpoint will be depricated soon.</aside>
 <h3 id='http-request-4'>HTTP Request</h3>
 <p><code>GET http://localhost:3000/posts/type/:type?page=n</code></p>
 <h3 id='query-parameters-3'>Query Parameters</h3>
@@ -885,6 +938,691 @@ Remember — a happy kitten is an authenticated kitten!
 <tr>
 <td>id</td>
 <td>id of the required post</td>
+</tr>
+</tbody></table>
+<h1 id='comments'>Comments</h1>
+<p>Comments are nested in posts, so all operations on comments need the respective post ID.</p>
+<h2 id='create-a-comment'>Create a Comment</h2><pre class="highlight shell tab-shell"><code>curl http://localhost:3000/post/:post_id/comments <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -F <span class="s2">"content=this is a comment"</span> 
+</code></pre>
+<blockquote>
+<p>The above command returns, along with the required auth headers, JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">77</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"comment by user_member@gmail.com on post 5"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-08T05:57:58.997Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-08T05:57:58.997Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"user_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">97</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New Comment"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-29T05:30:23.889Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-29T05:30:23.889Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Prasanna Mishra"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">98</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New Comment"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-29T05:32:21.152Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-29T05:32:21.152Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Prasanna Mishra"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>This endpoint creates a comment on a post.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST http://localhost:3000/posts/:post_id/comments</code></p>
+<h3 id='parameters'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>comtent</td>
+<td>Content of the comment.</td>
+</tr>
+</tbody></table>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>post_id</td>
+<td>ID of the post on which the comment is to be made.</td>
+</tr>
+</tbody></table>
+<h2 id='all-comments'>All Comments</h2><pre class="highlight shell tab-shell"><code>curl http://localhost:3000/post/:post_id/comments 
+</code></pre>
+<blockquote>
+<p>The above command returns, along with the required auth headers, JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">77</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"comment by user_member@gmail.com on post 5"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-08T05:57:58.997Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-08T05:57:58.997Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"user_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">97</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New Comment"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-29T05:30:23.889Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-29T05:30:23.889Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Prasanna Mishra"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">98</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New Comment"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-29T05:32:21.152Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-29T05:32:21.152Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Prasanna Mishra"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"... all comments on the post"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>This endpoint lists all comments on a post.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET http://localhost:3000/posts/:post_id/comments</code></p>
+<h3 id='url-parameters-2'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>post_id</td>
+<td>ID of the post.</td>
+</tr>
+</tbody></table>
+<h2 id='deleting-a-comment'>Deleting a comment</h2><pre class="highlight shell tab-shell"><code>curl http://localhost:3000/post/:post_id/comments/:comment_id
+  -X DELETE
+</code></pre>
+<blockquote>
+<p>The above command returns, along with the required auth headers, JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>This endpoint deletes a comment on a post.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>DELETE http://localhost:3000/posts/:post_id/comments/:comment_id</code></p>
+<h3 id='url-parameters-3'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>post_id</td>
+<td>ID of the post.</td>
+</tr>
+<tr>
+<td>comment_id</td>
+<td>ID of the comment.</td>
+</tr>
+</tbody></table>
+<h1 id='exchange-rates'>Exchange Rates</h1>
+<p>These are different from rates of companies. These are shown on the main app screen updated by admin.</p>
+<h2 id='all-exchange-rates'>All Exchange Rates</h2><pre class="highlight shell tab-shell"><code>curl http://localhost:3000/exchange_rates 
+</code></pre>
+<blockquote>
+<p>The above command returns, along with the required auth headers, JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ticks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"day"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-04"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-08T05:57:59.208Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-08T05:57:59.208Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"day"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-05"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-08T05:57:59.213Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-08T05:57:59.213Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"day"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-06"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-08T05:57:59.217Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-08T05:57:59.217Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"day"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-07"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-08T05:57:59.223Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-08T05:57:59.223Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"day"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-08"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-08T05:57:59.229Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-08T05:57:59.229Z"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"avg"</span><span class="p">:</span><span class="w"> </span><span class="mf">4.4</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>This endpoint lists 5 ticks of exchange rates and an average of the 5 ticks (no average if less than 5 ticks).</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET http://localhost:3000/exchange_rates</code></p>
+<h1 id='companies'>Companies</h1><h2 id='create-a-company'>Create a Company</h2><pre class="highlight shell tab-shell"><code>curl http://localhost:3000/companies <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -F <span class="s2">"name=user_admin@gmail.com"</span> <span class="se">\</span>
+  -F <span class="s2">"address=Sydney"</span> <span class="se">\</span>
+  -F <span class="s2">"longitude=63.32.36"</span> <span class="se">\</span>
+  -F <span class="s2">"latitude=52.32.32"</span> <span class="se">\</span>
+  -F <span class="s2">"description=asdfh adf hdfasdf a aladjf sladfjladhfjlka hd"</span> <span class="se">\</span>
+  -F <span class="s2">"phone=9746321987"</span> <span class="se">\</span>
+  -F <span class="s2">"email=jon@doe.duh"</span> <span class="se">\</span>
+  -F <span class="s2">"website=www.google.com"</span> <span class="se">\</span>
+  -F <span class="s2">"of_type=Flight"</span> <span class="se">\</span>
+  -F <span class="s2">"keyline=Booked valways"</span> <span class="se">\</span>
+  -F <span class="s2">"opening_time=9:00"</span> <span class="se">\</span>
+  -F <span class="s2">"closing_time=18:00"</span> <span class="se">\</span>
+</code></pre>
+<blockquote>
+<p>The above command returns, along with the required auth headers, JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sydney"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"closing_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:00"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"asdfh adf hdfasdf a aladjf sladfjladhfjlka hd"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jon@doe.duh"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"keyline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Booked valways"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"latest_rate"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_admin@gmail.com"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"of_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Flight"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"opening_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9:00"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9746321987"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"rate_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"rates"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="s2">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="s2">"website"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.google.com"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>This endpoint creates a company.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST http://localhost:3000/companies</code></p>
+<h3 id='parameters'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>Name of the company.</td>
+</tr>
+<tr>
+<td>address</td>
+<td>Self explanatory</td>
+</tr>
+<tr>
+<td>latitude</td>
+<td>Self explanatory</td>
+</tr>
+<tr>
+<td>longitude</td>
+<td>Self explanatory</td>
+</tr>
+<tr>
+<td>description</td>
+<td>Self explanatory</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>Self explanatory</td>
+</tr>
+<tr>
+<td>email</td>
+<td>Self explanatory</td>
+</tr>
+<tr>
+<td>website</td>
+<td>Self explanatory</td>
+</tr>
+<tr>
+<td>of_type</td>
+<td>One of <code>Exchange</code> and <code>Flight</code></td>
+</tr>
+<tr>
+<td>keyline</td>
+<td>Self explanatory</td>
+</tr>
+<tr>
+<td>opening_time</td>
+<td>Self explanatory</td>
+</tr>
+<tr>
+<td>closing_time</td>
+<td>Self explanatory</td>
+</tr>
+</tbody></table>
+<h2 id='all-companies'>All Companies</h2><pre class="highlight shell tab-shell"><code>curl http://localhost:3000/companies
+</code></pre>
+<blockquote>
+<p>The above command returns, along with the required auth headers, JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_admin@gmail.com"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sydney"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"asdfh adf hdfasdf a aladjf sladfjladhfjlka hd"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"website"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.google.com"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"keyline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Booked valways"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jon@doe.duh"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9746321987"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"of_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Flight"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"rate_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"latest_rate"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"opening_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9:00"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"closing_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:00"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"rates"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="s2">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Company1"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Aus"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is a standard descriptopn"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"website"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"keyline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no keyline is our keyline"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fuck@you"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9841 aru no aafai han"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"of_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"baje"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"rate_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"latest_rate"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"opening_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rati sute paxi"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"closing_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bihana uthna agadi"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"rates"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="s2">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_admin@gmail.com"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Prasanna Mishra"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"image"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"admin"</span><span class="w">
+          </span><span class="p">],</span><span class="w">
+          </span><span class="s2">"admin"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Will Warmanwitz"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"image"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"member"</span><span class="w">
+          </span><span class="p">],</span><span class="w">
+          </span><span class="s2">"admin"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"... all companies"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint lists all companies.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET http://localhost:3000/companies</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>page</td>
+<td>true</td>
+<td>page number of companies, each page consists of 10 posts, returns all if null</td>
+</tr>
+</tbody></table>
+<h2 id='companies-by-type'>Companies by Type</h2><pre class="highlight shell tab-shell"><code>curl http://localhost:3000/companies/type/Flight
+</code></pre>
+<blockquote>
+<p>The above command returns, along with the required auth headers, JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_admin@gmail.com"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sydney"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"asdfh adf hdfasdf a aladjf sladfjladhfjlka hd"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"website"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.google.com"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"keyline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Booked valways"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jon@doe.duh"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9746321987"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"of_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Flight"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"rate_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"latest_rate"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"opening_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9:00"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"closing_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:00"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"rates"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="s2">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_admin@gmail.com"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Room"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Booked"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"website"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Booked"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"keyline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Booked"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Booked"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Booked"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"of_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Flight"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"rate_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"latest_rate"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"opening_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Booked"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"closing_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Booked"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"rates"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="s2">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"... all companies of type"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint lists all companies by type.</p>
+
+<aside class="warning"><code>Deprication Warning!</code> This endpoint will be depricated soon.</aside>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>GET http://localhost:3000/companies/type/:type</code></p>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>page</td>
+<td>true</td>
+<td>page number of companies, each page consists of 6 companies, returns all if null</td>
+</tr>
+</tbody></table>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>type of the required company [one of <code>Flight</code> and <code>Exchange</code>].</td>
+</tr>
+</tbody></table>
+<h1 id='rates'>Rates</h1>
+<p>These are the rates of companies (flight rates and exchange rates). Rates are nested in companies, so all operations on rates need the respective company ID.</p>
+<h2 id='create-a-rate'>Create a Rate</h2><pre class="highlight shell tab-shell"><code>curl http://localhost:3000/companies/:company_id/rates <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -F <span class="s2">"description=this is a description"</span> <span class="se">\ </span>
+  -F <span class="s2">"price=300"</span> 
+</code></pre>
+<blockquote>
+<p>The above command returns, along with the required auth headers, JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_admin@gmail.com"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sydney"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"asdfh adf hdfasdf a aladjf sladfjladhfjlka hd"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"website"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.google.com"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"keyline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Booked valways"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jon@doe.duh"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9746321987"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"of_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Flight"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"rate_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"latest_rate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is a description"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"300"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-29T06:44:32.489Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-29T06:44:32.489Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"opening_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9:00"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"closing_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:00"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"rates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is a description"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"300"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-29T06:44:32.489Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Flight"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"... other rates"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>This endpoint creates a rate on a company.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST http://localhost:3000/companies/:company_id/rates</code></p>
+<h3 id='parameters'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>description</td>
+<td>Self Explanatory.</td>
+</tr>
+<tr>
+<td>price</td>
+<td>Exchange rate of 1AUD if company type = exchange, price of plane ticket in AUD if type is Flight.</td>
+</tr>
+</tbody></table>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>company_id</td>
+<td>ID of the company on which the rate is to be added.</td>
+</tr>
+</tbody></table>
+<h2 id='update-a-rate'>Update a Rate</h2><pre class="highlight shell tab-shell"><code>curl http://localhost:3000/companies/:company_id/rates <span class="se">\</span>
+  -X PUT <span class="se">\</span>
+  -F <span class="s2">"description=this is a description"</span> <span class="se">\ </span>
+  -F <span class="s2">"price=300"</span> 
+</code></pre>
+<blockquote>
+<p>The above command returns, along with the required auth headers, JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"400"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-29T06:43:10.416Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Flight"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"403"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-29T06:43:20.398Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Flight"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"203"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-29T06:43:24.352Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Flight"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is a description"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30023"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-29T06:53:12.118Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Flight"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>This endpoint updates a rate on a company and returns all the rates of that company.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>PUT http://localhost:3000/companies/:company_id/rates</code></p>
+<h3 id='parameters-2'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>description</td>
+<td>Self Explanatory.</td>
+</tr>
+<tr>
+<td>price</td>
+<td>Exchange rate of 1AUD if company type = exchange, price of plane ticket in AUD if type is Flight.</td>
+</tr>
+</tbody></table>
+<h3 id='url-parameters-2'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>company_id</td>
+<td>ID of the company on which the rate is to be added.</td>
+</tr>
+</tbody></table>
+<h2 id='all-rates'>All Rates</h2><pre class="highlight shell tab-shell"><code>curl http://localhost:3000/companies/:company_id/rates?page<span class="o">=</span>1 
+</code></pre>
+<blockquote>
+<p>The above command returns, along with the required auth headers, JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"rate_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"rates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is a description"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"300"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-29T06:44:32.489Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Flight"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"203"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-29T06:43:24.352Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Flight"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"403"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-29T06:43:20.398Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Flight"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"400"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-29T06:43:10.416Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Flight"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>This endpoint lists all rates of a company paginated.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>GET http://localhost:3000/companies/:company_id/rates?page=1</code></p>
+<h3 id='url-parameters-3'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>company_id</td>
+<td>ID of the company.</td>
+</tr>
+</tbody></table>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>page</td>
+<td>true</td>
+<td>page number of rates, each page consists of 6 rates, returns first page if null</td>
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
