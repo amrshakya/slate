@@ -151,6 +151,12 @@ This endpoint lists all companies.
 Parameter | Optional | Description
 --------- | ---------|----------
 page | true | page number of companies, each page consists of 10 posts, returns all if null
+of_type | true | status of post, one of ` 0 => Exchange, 1 => Flight `
+name | true | searches wuth name LIKE input
+email | true |  searches wuth email LIKE input
+address | true |  searches wuth address LIKE input
+phone | true |  searches wuth phome LIKE input
+created_between | true | searched for records created between `start_date` and `end_date`. Send as a hash `?created_between[start_date]=YYYY-MM-DD&created_between[end_date]=YYYY-MM-DD`
 
 ## Companies by Type
 

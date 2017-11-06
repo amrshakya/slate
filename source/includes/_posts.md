@@ -123,13 +123,15 @@ This endpoint lists all posts.
 
 ### HTTP Request
 
-`GET http://localhost:3000/posts?page=n`
+`GET http://localhost:3000/posts?page=n&page_type=0&page_status=1`
 
 ### Query Parameters
 
-Parameter | Optional | Description
---------- | ---------|----------
-page | true | page number of posts, each page consists of 10 posts, returns first page if null
+Parameter | Optional  | Description
+--------- | --------- |---------
+page | true  | page number of posts, each page consists of 10 posts, returns first page if null
+post_type | true | type of post, one of ` 0 => Room, 1 => Job, 2 => Announcement `
+post_status | true | status of post, one of ` 0 => Booked, 1 => Available `
 
 ## Posts by Status
 
