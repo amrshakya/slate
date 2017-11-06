@@ -247,6 +247,9 @@
               </ul>
           </li>
           <li>
+            <a href="#filter" class="toc-h1 toc-link" data-title="Filter">Filter</a>
+          </li>
+          <li>
             <a href="#posts" class="toc-h1 toc-link" data-title="Posts">Posts</a>
               <ul class="toc-list-h2">
                   <li>
@@ -497,6 +500,8 @@ Remember — a happy kitten is an authenticated kitten!
 <td>The ID of the kitten to delete</td>
 </tr>
 </tbody></table>
+<h1 id='filter'>Filter</h1>
+<p>The method to filters results is used by selected query parameters. The list of these parameters is present in respective requests.</p>
 <h1 id='posts'>Posts</h1><h2 id='create-a-post'>Create a post</h2><pre class="highlight shell tab-shell"><code>curl http://localhost:3000/posts 
   -X POST 
   -F <span class="s2">"content=user_admin@gmail.com"</span> 
@@ -622,7 +627,7 @@ Remember — a happy kitten is an authenticated kitten!
 </span></code></pre>
 <p>This endpoint lists all posts.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://localhost:3000/posts?page=n</code></p>
+<p><code>GET http://localhost:3000/posts?page=n&amp;page_type=0&amp;page_status=1</code></p>
 <h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
@@ -635,6 +640,16 @@ Remember — a happy kitten is an authenticated kitten!
 <td>page</td>
 <td>true</td>
 <td>page number of posts, each page consists of 10 posts, returns first page if null</td>
+</tr>
+<tr>
+<td>post_type</td>
+<td>true</td>
+<td>type of post, one of <code>0 =&gt; Room, 1 =&gt; Job, 2 =&gt; Announcement</code></td>
+</tr>
+<tr>
+<td>post_status</td>
+<td>true</td>
+<td>status of post, one of <code>0 =&gt; Booked, 1 =&gt; Available</code></td>
 </tr>
 </tbody></table>
 <h2 id='posts-by-status'>Posts by Status</h2><pre class="highlight shell tab-shell"><code>curl http://localhost:3000/posts/status/Booked?page<span class="o">=</span>1
@@ -1320,6 +1335,36 @@ Remember — a happy kitten is an authenticated kitten!
 <td>page</td>
 <td>true</td>
 <td>page number of companies, each page consists of 10 posts, returns all if null</td>
+</tr>
+<tr>
+<td>of_type</td>
+<td>true</td>
+<td>status of post, one of <code>0 =&gt; Exchange, 1 =&gt; Flight</code></td>
+</tr>
+<tr>
+<td>name</td>
+<td>true</td>
+<td>searches wuth name LIKE input</td>
+</tr>
+<tr>
+<td>email</td>
+<td>true</td>
+<td>searches wuth email LIKE input</td>
+</tr>
+<tr>
+<td>address</td>
+<td>true</td>
+<td>searches wuth address LIKE input</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>true</td>
+<td>searches wuth phome LIKE input</td>
+</tr>
+<tr>
+<td>created_between</td>
+<td>true</td>
+<td>searched for records created between <code>start_date</code> and <code>end_date</code>. Send as a hash <code>?created_between[start_date]=YYYY-MM-DD&amp;created_between[end_date]=YYYY-MM-DD</code></td>
 </tr>
 </tbody></table>
 <h2 id='companies-by-type'>Companies by Type</h2><pre class="highlight shell tab-shell"><code>curl http://localhost:3000/companies/type/Flight
